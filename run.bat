@@ -150,6 +150,8 @@ set L=2
 set K=4
 set CA=33
 set VI=♥♥♥
+set r1=0
+set r2=0
 ::senario::
 goto stup
 :doo
@@ -455,9 +457,14 @@ set J=2
 set L=2
 set K=4
 set R=5
+set moe=○
 
 set /a ed=%random% %%41 +2
 set /a cb=%random% %%48 +2
+
+set /a r1=%random% %%41 +2
+set /a r2=%random% %%48 +2
+
 
 if %F% equ 6 goto Win
 powershell.exe [Console]::Beep(600, 100); [Console]::Beep(800, 500);
@@ -495,6 +502,7 @@ pause >nul
 goto menu
 
 :F1
+echo [%r1%;%r2%H[33m%moe%
 echo [%ed%;%cb%H[35m 
 goto mov
 :max
@@ -542,6 +550,7 @@ if %errorlevel% equ 5 goto min
 goto do
 ::██
 :F2
+echo [%r1%;%r2%H[33m%moe%
 echo [%ed%;%cb%H[35m 
 goto mov
 :max
@@ -588,6 +597,7 @@ if %errorlevel% equ 5 goto min
 goto do
 
 :F3
+echo [%r1%;%r2%H[33m%moe%
 echo [%ed%;%cb%H[35m 
 goto mov
 :max
@@ -634,6 +644,7 @@ if %errorlevel% equ 5 goto min
 goto do
 
 :F4
+echo [%r1%;%r2%H[33m%moe%
 echo [%ed%;%cb%H[35m 
 goto mov
 :max
@@ -680,6 +691,7 @@ if %errorlevel% equ 5 goto min
 goto do
 
 :F5
+echo [%r1%;%r2%H[33m%moe%
 echo [%ed%;%cb%H[35m 
 goto mov
 :max
@@ -847,8 +859,18 @@ pause>nul
 cls
 goto baco
 :mov
+
+:posys
+set c1=%Y%m%X%
+set c2=%r1%m%r2%
+
+if %c1% equ %c2% set /a Z+=1 & powershell.exe [Console]::Beep(1400, 44); & set /a r1=%random% %%41 +2 & set /a r2=%random% %%48 +2
+
+if %Z% equ 5 set /a cxz+=1 & set Z=0 & powershell.exe [Console]::Beep(600, 100); [Console]::Beep(800, 500);
+
 if %pn% equ 2 goto mv
 if %pn% equ 1 set pn=2 & goto max
+
 :mv
 if %ed% lss %Y% set /a ed+=1 & goto m1
 :m1
@@ -859,6 +881,11 @@ if %cb% lss %X% set /a cb+=1 & goto m3
 if %cb% gtr %X% set /a cb-=1 & goto pos
 goto pos
 :pos
+if %cxz% gtr 3 set vi=♥♥♥+
+if %cxz% equ 3 set vi=♥♥♥
+if %cxz% equ 2 set vi=♥♥ & echo [43H██████████████L I F E !███████████████████████████
+if %cxz% equ 1 set vi=♥ & echo [43H██████████████L I F E !██L I F E !████████████████
+
 set /a pn-=1
 set uf=%ed%m%cb%
 set ef=%Y%m%X%
@@ -867,6 +894,8 @@ goto max
 
 :lifesys
 set /a cxz-=1
+if %cxz% gtr 3 set vi=♥♥♥+
+if %cxz% equ 3 set vi=♥♥♥
 if %cxz% equ 2 set vi=♥♥ & echo [43H██████████████L I F E !███████████████████████████& powershell.exe [Console]::Beep(800, 100); [Console]::Beep(600, 200); [Console]::Beep(800, 100); [Console]::Beep(600, 200);
 if %cxz% equ 1 set vi=♥ & echo [43H██████████████L I F E !██L I F E !████████████████& powershell.exe [Console]::Beep(800, 100); [Console]::Beep(600, 200); [Console]::Beep(800, 100); [Console]::Beep(600, 200);
 if %cxz% equ 0 (goto GaOv1) else (goto max)
